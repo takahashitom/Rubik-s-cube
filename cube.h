@@ -4,11 +4,12 @@
 #include <iostream>
 #include <cstring>
 
+extern const int sizeC = 8;
+extern const int sizeE = 12;
+
 class Cube
 {
-    static const int sizeC = 8;
-    static const int sizeE = 12;
-
+private:
     int cp[sizeC]; // コーナーパーツ
     int co[sizeC]; // コーナーパーツの向き
     int ep[sizeE]; // エッジパーツ
@@ -17,15 +18,50 @@ class Cube
     int cost;      // ゴールまでの予測コスト
 
 public:
-    Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE])
+    Cube() {}
+
+    Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE], int init_step) : step(init_step)
     {
         std::memcpy(cp, init_cp, sizeC * sizeof(int));
         std::memcpy(co, init_co, sizeC * sizeof(int));
         std::memcpy(ep, init_ep, sizeE * sizeof(int));
         std::memcpy(eo, init_eo, sizeE * sizeof(int));
+    }
 
-        step = 0;
-        cost = -1;
+    void get_cp(int out_cp[sizeC])
+    {
+        std::memcpy(out_cp, cp, sizeC * sizeof(int));
+    }
+
+    void get_co(int out_co[sizeC])
+    {
+        std::memcpy(out_co, co, sizeC * sizeof(int));
+    }
+
+    void get_ep(int out_ep[sizeE])
+    {
+        std::memcpy(out_ep, ep, sizeE * sizeof(int));
+    }
+
+    void get_eo(int out_eo[sizeE])
+    {
+        std::memcpy(out_eo, eo, sizeE * sizeof(int));
+    }
+
+    int step_plus()
+    {
+        step += step;
+        return step;
+    }
+
+    int get_step()
+    {
+        return step;
+    }
+
+    void set_step(int setS)
+    {
+        step = setS;
     }
 };
 
