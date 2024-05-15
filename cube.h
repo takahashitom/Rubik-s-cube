@@ -3,19 +3,24 @@
 
 #include <iostream>
 #include <cstring>
+#include <array>
 
-extern const int sizeC = 8;
-extern const int sizeE = 12;
+extern const int sizeC;
+extern const int sizeE;
 
 class Cube
 {
 private:
-    int cp[sizeC]; // コーナーパーツ
-    int co[sizeC]; // コーナーパーツの向き
-    int ep[sizeE]; // エッジパーツ
-    int eo[sizeE]; // エッジパーツの向き
-    int step;      // 手数
-    int cost;      // ゴールまでの予測コスト
+    int cp[8];  // コーナーパーツ
+    int co[8];  // コーナーパーツの向き
+    int ep[12]; // エッジパーツ
+    int eo[12]; // エッジパーツの向き
+    // std::array<int, sizeC> cp;
+    // std::array<int, sizeC> co;
+    // std::array<int, sizeE> ep;
+    // std::array<int, sizeE> eo;
+    int step; // 手数
+    int cost; // ゴールまでの予測コスト
 
 public:
     Cube() {}
@@ -62,6 +67,46 @@ public:
     void set_step(int setS)
     {
         step = setS;
+    }
+
+    void cp_disp() const
+    {
+        std::cout << "cp: ";
+        for (int i = 0; i < sizeC; i++)
+        {
+            std::cout << cp[i] << ", ";
+        }
+        std::cout << std::endl;
+    }
+
+    void co_disp() const
+    {
+        std::cout << "co: ";
+        for (int i = 0; i < sizeC; i++)
+        {
+            std::cout << co[i] << ", ";
+        }
+        std::cout << std::endl;
+    }
+
+    void ep_disp() const
+    {
+        std::cout << "ep: ";
+        for (int i = 0; i < sizeE; i++)
+        {
+            std::cout << ep[i] << ", ";
+        }
+        std::cout << std::endl;
+    }
+
+    void eo_disp() const
+    {
+        std::cout << "eo: ";
+        for (int i = 0; i < sizeE; i++)
+        {
+            std::cout << eo[i] << ", ";
+        }
+        std::cout << std::endl;
     }
 };
 
