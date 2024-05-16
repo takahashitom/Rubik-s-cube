@@ -5,16 +5,16 @@
 #include <cstring>
 #include <array>
 
-extern const int sizeC;
-extern const int sizeE;
+constexpr int sizeC = 8;
+constexpr int sizeE = 12;
 
 class Cube
 {
 private:
-    int cp[8];  // コーナーパーツ
-    int co[8];  // コーナーパーツの向き
-    int ep[12]; // エッジパーツ
-    int eo[12]; // エッジパーツの向き
+    int cp[sizeC]; // コーナーパーツ
+    int co[sizeC]; // コーナーパーツの向き
+    int ep[sizeE]; // エッジパーツ
+    int eo[sizeE]; // エッジパーツの向き
     // std::array<int, sizeC> cp;
     // std::array<int, sizeC> co;
     // std::array<int, sizeE> ep;
@@ -25,7 +25,7 @@ private:
 public:
     Cube() {}
 
-    Cube(int init_cp[8], int init_co[8], int init_ep[12], int init_eo[12], int init_step) : step(init_step)
+    Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE], int init_step) : step(init_step)
     {
         std::memcpy(cp, init_cp, sizeC * sizeof(int));
         std::memcpy(co, init_co, sizeC * sizeof(int));
@@ -33,22 +33,22 @@ public:
         std::memcpy(eo, init_eo, sizeE * sizeof(int));
     }
 
-    void get_cp(int out_cp[8])
+    void get_cp(int out_cp[sizeC])
     {
         std::memcpy(out_cp, cp, sizeC * sizeof(int));
     }
 
-    void get_co(int out_co[8])
+    void get_co(int out_co[sizeC])
     {
         std::memcpy(out_co, co, sizeC * sizeof(int));
     }
 
-    void get_ep(int out_ep[12])
+    void get_ep(int out_ep[sizeE])
     {
         std::memcpy(out_ep, ep, sizeE * sizeof(int));
     }
 
-    void get_eo(int out_eo[12])
+    void get_eo(int out_eo[sizeE])
     {
         std::memcpy(out_eo, eo, sizeE * sizeof(int));
     }

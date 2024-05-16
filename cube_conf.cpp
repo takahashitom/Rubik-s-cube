@@ -2,9 +2,6 @@
 
 using namespace std;
 
-const int sizeC = 8;
-const int sizeE = 12;
-
 void cube_disp(Cube C)
 {
     C.cp_disp();
