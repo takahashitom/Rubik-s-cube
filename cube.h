@@ -55,8 +55,8 @@ public:
 
     int step_plus()
     {
-        step += step;
-        return step;
+        int new_step = step + 1;
+        return new_step;
     }
 
     int get_step()

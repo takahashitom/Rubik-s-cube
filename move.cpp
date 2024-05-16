@@ -396,8 +396,7 @@ Cube rr_move(Cube c_state)
 
     new_state = r_move(r_move(r_move(c_state)));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -408,8 +407,7 @@ Cube lr_move(Cube c_state)
 
     new_state = l_move(l_move(l_move(c_state)));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -420,8 +418,7 @@ Cube ur_move(Cube c_state)
 
     new_state = u_move(u_move(u_move(c_state)));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -432,8 +429,7 @@ Cube dr_move(Cube c_state)
 
     new_state = d_move(d_move(d_move(c_state)));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -444,8 +440,7 @@ Cube fr_move(Cube c_state)
 
     new_state = f_move(f_move(f_move(c_state)));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -456,8 +451,7 @@ Cube br_move(Cube c_state)
 
     new_state = b_move(b_move(b_move(c_state)));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -468,8 +462,7 @@ Cube r2_move(Cube c_state)
 
     new_state = r_move(r_move(c_state));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -480,8 +473,7 @@ Cube l2_move(Cube c_state)
 
     new_state = l_move(l_move(c_state));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -492,8 +484,7 @@ Cube u2_move(Cube c_state)
 
     new_state = u_move(u_move(c_state));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -504,8 +495,7 @@ Cube d2_move(Cube c_state)
 
     new_state = d_move(d_move(c_state));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -516,8 +506,7 @@ Cube f2_move(Cube c_state)
 
     new_state = f_move(f_move(c_state));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
@@ -528,8 +517,7 @@ Cube b2_move(Cube c_state)
 
     new_state = b_move(b_move(c_state));
 
-    int step = c_state.get_step();
-    new_state.set_step(step + 1);
+    new_state.set_step(c_state.step_plus());
 
     return new_state;
 }
