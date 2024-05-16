@@ -23,6 +23,10 @@ int main()
 
     Cube C(init_cp, init_co, init_ep, init_eo, 0);
 
+    cube_disp(C);
+
+    cout << endl;
+
     Cube R = r_move(C);
 
     cube_disp(R);
