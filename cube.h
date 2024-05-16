@@ -25,7 +25,7 @@ private:
 public:
     Cube() {}
 
-    Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE], int init_step) : step(init_step)
+    Cube(int init_cp[8], int init_co[8], int init_ep[12], int init_eo[12], int init_step) : step(init_step)
     {
         std::memcpy(cp, init_cp, sizeC * sizeof(int));
         std::memcpy(co, init_co, sizeC * sizeof(int));
@@ -33,22 +33,22 @@ public:
         std::memcpy(eo, init_eo, sizeE * sizeof(int));
     }
 
-    void get_cp(int out_cp[sizeC])
+    void get_cp(int out_cp[8])
     {
         std::memcpy(out_cp, cp, sizeC * sizeof(int));
     }
 
-    void get_co(int out_co[sizeC])
+    void get_co(int out_co[8])
     {
         std::memcpy(out_co, co, sizeC * sizeof(int));
     }
 
-    void get_ep(int out_ep[sizeE])
+    void get_ep(int out_ep[12])
     {
         std::memcpy(out_ep, ep, sizeE * sizeof(int));
     }
 
-    void get_eo(int out_eo[sizeE])
+    void get_eo(int out_eo[12])
     {
         std::memcpy(out_eo, eo, sizeE * sizeof(int));
     }
