@@ -15,22 +15,43 @@ private:
     int co[sizeC]; // コーナーパーツの向き
     int ep[sizeE]; // エッジパーツ
     int eo[sizeE]; // エッジパーツの向き
-    // std::array<int, sizeC> cp;
-    // std::array<int, sizeC> co;
-    // std::array<int, sizeE> ep;
-    // std::array<int, sizeE> eo;
-    int step; // 手数
-    int cost; // ゴールまでの予測コスト
 
 public:
     Cube() {}
 
-    Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE], int init_step) : step(init_step)
+    Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE])
     {
         std::memcpy(cp, init_cp, sizeC * sizeof(int));
         std::memcpy(co, init_co, sizeC * sizeof(int));
         std::memcpy(ep, init_ep, sizeE * sizeof(int));
         std::memcpy(eo, init_eo, sizeE * sizeof(int));
+    }
+
+    Cube apply_move(Cube current_state, Cube move)
+    {
+        Cube new_state;
+
+        for (int i = 0; i < sizeC; i++)
+        {
+            new_state.cp[i] = current_state.cp[move.cp[i]];
+        }
+
+        for (int i = 0; i < sizeC; i++)
+        {
+            new_state.co[i] = (current_state.co[move.cp[i]] + move.co[i]) % 3;
+        }
+
+        for (int i = 0; i < sizeE; i++)
+        {
+            new_state.ep[i] = current_state.ep[move.ep[i]];
+        }
+
+        for (int i = 0; i < sizeE; i++)
+        {
+            new_state.eo[i] = (current_state.eo[move.ep[i]] + move.ep[i]) % 2;
+        }
+
+        return new_state;
     }
 
     void get_cp(int out_cp[sizeC])
