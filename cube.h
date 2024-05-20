@@ -27,28 +27,28 @@ public:
         std::memcpy(eo, init_eo, sizeE * sizeof(int));
     }
 
-    Cube apply_move(Cube current_state, Cube move)
+    Cube apply_move(Cube move) const
     {
         Cube new_state;
 
         for (int i = 0; i < sizeC; i++)
         {
-            new_state.cp[i] = current_state.cp[move.cp[i]];
+            new_state.cp[i] = cp[move.cp[i]];
         }
 
         for (int i = 0; i < sizeC; i++)
         {
-            new_state.co[i] = (current_state.co[move.cp[i]] + move.co[i]) % 3;
+            new_state.co[i] = (co[move.cp[i]] + move.co[i]) % 3;
         }
 
         for (int i = 0; i < sizeE; i++)
         {
-            new_state.ep[i] = current_state.ep[move.ep[i]];
+            new_state.ep[i] = ep[move.ep[i]];
         }
 
         for (int i = 0; i < sizeE; i++)
         {
-            new_state.eo[i] = (current_state.eo[move.ep[i]] + move.ep[i]) % 2;
+            new_state.eo[i] = (eo[move.ep[i]] + move.eo[i]) % 2;
         }
 
         return new_state;
@@ -115,23 +115,23 @@ public:
     }
 };
 
-Cube r_move(Cube);  // r回転
-Cube l_move(Cube);  // l回転
-Cube u_move(Cube);  // u回転
-Cube d_move(Cube);  // d回転
-Cube f_move(Cube);  // f回転
-Cube b_move(Cube);  // b回転
-Cube rr_move(Cube); // r'回転
-Cube lr_move(Cube); // l'回転
-Cube ur_move(Cube); // u'回転
-Cube dr_move(Cube); // d'回転
-Cube fr_move(Cube); // f'回転
-Cube br_move(Cube); // b'回転
-Cube r2_move(Cube); // r2回転
-Cube l2_move(Cube); // l2回転
-Cube u2_move(Cube); // u2回転
-Cube d2_move(Cube); // d2回転
-Cube f2_move(Cube); // f2回転
-Cube b2_move(Cube); // b2回転
+extern const Cube r_move;
+extern const Cube l_move;
+extern const Cube u_move;
+extern const Cube d_move;
+extern const Cube f_move;
+extern const Cube b_move;
+extern const Cube rr_move;
+extern const Cube lr_move;
+extern const Cube ur_move;
+extern const Cube dr_move;
+extern const Cube fr_move;
+extern const Cube br_move;
+extern const Cube r2_move;
+extern const Cube l2_move;
+extern const Cube u2_move;
+extern const Cube d2_move;
+extern const Cube f2_move;
+extern const Cube b2_move;
 
 #endif
