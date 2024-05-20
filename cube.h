@@ -54,6 +54,37 @@ public:
         return new_state;
     }
 
+    bool judge()
+    {
+        for (int i = 0; i < sizeC; i++)
+        {
+            if (cp[i] != i)
+            {
+                return false;
+            }
+
+            if (co[i] != 0)
+            {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < sizeE; i++)
+        {
+            if (ep[i] != i)
+            {
+                return false;
+            }
+
+            if (eo[i] != 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     void get_cp(int out_cp[sizeC])
     {
         std::memcpy(out_cp, cp, sizeC * sizeof(int));

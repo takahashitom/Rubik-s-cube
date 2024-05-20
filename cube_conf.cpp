@@ -21,6 +21,15 @@ int main()
 
     cube_disp(C);
 
+    if (C.judge() != 0)
+    {
+        cout << "完成状態です\n";
+    }
+    else
+    {
+        cout << "完成状態ではありません\n";
+    }
+
     cout << endl;
 
     C = C.apply_move(l_move);
@@ -45,4 +54,13 @@ int main()
     C = C.apply_move(f2_move);
 
     cube_disp(C);
+
+    if (C.judge() != 0)
+    {
+        cout << "完成状態です\n";
+    }
+    else
+    {
+        cout << "完成状態ではありません\n";
+    }
 }
