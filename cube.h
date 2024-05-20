@@ -74,22 +74,6 @@ public:
         std::memcpy(out_eo, eo, sizeE * sizeof(int));
     }
 
-    int step_plus()
-    {
-        step += step;
-        return step;
-    }
-
-    int get_step()
-    {
-        return step;
-    }
-
-    void set_step(int setS)
-    {
-        step = setS;
-    }
-
     void cp_disp() const
     {
         std::cout << "cp: ";
