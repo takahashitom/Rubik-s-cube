@@ -2,6 +2,26 @@
 
 using namespace std;
 
+bool prune(int depth, Cube state)
+{
+    if (depth == 1 and (state.count_solved_corners() < 4 or state.count_solved_edges() < 8))
+    {
+        return true;
+    }
+
+    if (depth == 2 and state.count_solved_edges() < 4)
+    {
+        return true;
+    }
+
+    if (depth == 3 and state.count_solved_edges() < 2)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 bool Search::depth_limited_search(Cube current_state, int depth)
 {
     if (depth == 0 && current_state.judge())
@@ -9,6 +29,11 @@ bool Search::depth_limited_search(Cube current_state, int depth)
         return true;
     }
     if (depth == 0)
+    {
+        return false;
+    }
+
+    if (prune(depth, current_state))
     {
         return false;
     }

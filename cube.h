@@ -39,9 +39,16 @@ public:
     // 完成状態か判定する関数
     bool judge();
 
+    // 揃っているコーナーパーツをカウントする関数
+    int count_solved_corners();
+
+    // 揃っているエッジパーツをカウントする関数
+    int count_solved_edges();
+
     // 次の操作が可能かどうかを判定する関数
     bool move_available(std::string current, std::string next);
 
+    // 操作(string)をCube型で定義したものに対応付ける関数
     Cube operation(std::string move);
 
     void get_cp(int out_cp[sizeC])

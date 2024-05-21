@@ -61,6 +61,36 @@ bool Cube::judge()
     return true;
 }
 
+int Cube::count_solved_corners()
+{
+    int count = 0;
+
+    for (int i = 0; i < sizeC; i++)
+    {
+        if (cp[i] == i and co[i] == 0)
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int Cube::count_solved_edges()
+{
+    int count = 0;
+
+    for (int i = 0; i < sizeE; i++)
+    {
+        if (ep[i] == i and eo[i] == 0)
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
 bool Cube::move_available(string current, string next)
 {
     if (current == "Start")

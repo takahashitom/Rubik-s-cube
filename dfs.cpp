@@ -27,6 +27,8 @@ int main()
 
     x.start_search(C, 20);
 
+    C = C.apply_move(r_move);
+    C = C.apply_move(u_move);
     C = C.apply_move(rr_move);
     C = C.apply_move(f2_move);
     C = C.apply_move(d2_move);
