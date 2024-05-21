@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cstring>
 #include <array>
+#include <vector>
+#include <string>
 
 constexpr int sizeC = 8;
 constexpr int sizeE = 12;
@@ -15,23 +17,32 @@ private:
     int co[sizeC]; // コーナーパーツの向き
     int ep[sizeE]; // エッジパーツ
     int eo[sizeE]; // エッジパーツの向き
-    // std::array<int, sizeC> cp;
-    // std::array<int, sizeC> co;
-    // std::array<int, sizeE> ep;
-    // std::array<int, sizeE> eo;
-    int step; // 手数
-    int cost; // ゴールまでの予測コスト
 
 public:
+    std::vector<std::string> move = {"R", "L", "U", "D", "F", "B", "R'", "L'", "U'", "D'", "F'", "B'", "R2", "L2", "U2", "D2", "F2", "B2"};
+
+    // デフォルトコンストラクタ
     Cube() {}
 
-    Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE], int init_step) : step(init_step)
+    // コンストラクタ
+    Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE])
     {
         std::memcpy(cp, init_cp, sizeC * sizeof(int));
         std::memcpy(co, init_co, sizeC * sizeof(int));
         std::memcpy(ep, init_ep, sizeE * sizeof(int));
         std::memcpy(eo, init_eo, sizeE * sizeof(int));
     }
+
+    // 操作を行う関数
+    Cube apply_move(Cube move) const;
+
+    // 完成状態か判定する関数
+    bool judge();
+
+    // 次の操作が可能かどうかを判定する関数
+    bool move_available(std::string current, std::string next);
+
+    Cube operation(std::string move);
 
     void get_cp(int out_cp[sizeC])
     {
@@ -51,22 +62,6 @@ public:
     void get_eo(int out_eo[sizeE])
     {
         std::memcpy(out_eo, eo, sizeE * sizeof(int));
-    }
-
-    int step_plus()
-    {
-        int new_step = step + 1;
-        return new_step;
-    }
-
-    int get_step()
-    {
-        return step;
-    }
-
-    void set_step(int setS)
-    {
-        step = setS;
     }
 
     void cp_disp() const
@@ -110,23 +105,34 @@ public:
     }
 };
 
-Cube r_move(Cube);  // r回転
-Cube l_move(Cube);  // l回転
-Cube u_move(Cube);  // u回転
-Cube d_move(Cube);  // d回転
-Cube f_move(Cube);  // f回転
-Cube b_move(Cube);  // b回転
-Cube rr_move(Cube); // r'回転
-Cube lr_move(Cube); // l'回転
-Cube ur_move(Cube); // u'回転
-Cube dr_move(Cube); // d'回転
-Cube fr_move(Cube); // f'回転
-Cube br_move(Cube); // b'回転
-Cube r2_move(Cube); // r2回転
-Cube l2_move(Cube); // l2回転
-Cube u2_move(Cube); // u2回転
-Cube d2_move(Cube); // d2回転
-Cube f2_move(Cube); // f2回転
-Cube b2_move(Cube); // b2回転
+class Search
+{
+private:
+    std::vector<std::string> move{"Start"};
+
+public:
+    bool depth_limited_search(Cube current_state, int depth);
+
+    bool start_search(Cube state, int max_length);
+};
+
+extern const Cube r_move;
+extern const Cube l_move;
+extern const Cube u_move;
+extern const Cube d_move;
+extern const Cube f_move;
+extern const Cube b_move;
+extern const Cube rr_move;
+extern const Cube lr_move;
+extern const Cube ur_move;
+extern const Cube dr_move;
+extern const Cube fr_move;
+extern const Cube br_move;
+extern const Cube r2_move;
+extern const Cube l2_move;
+extern const Cube u2_move;
+extern const Cube d2_move;
+extern const Cube f2_move;
+extern const Cube b2_move;
 
 #endif

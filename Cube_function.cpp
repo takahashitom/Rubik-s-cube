@@ -1,0 +1,116 @@
+#include "cube.h"
+#include <unordered_map>
+
+using namespace std;
+
+Cube Cube::apply_move(Cube move) const
+{
+    Cube new_state;
+
+    for (int i = 0; i < sizeC; i++)
+    {
+        new_state.cp[i] = cp[move.cp[i]];
+    }
+
+    for (int i = 0; i < sizeC; i++)
+    {
+        new_state.co[i] = (co[move.cp[i]] + move.co[i]) % 3;
+    }
+
+    for (int i = 0; i < sizeE; i++)
+    {
+        new_state.ep[i] = ep[move.ep[i]];
+    }
+
+    for (int i = 0; i < sizeE; i++)
+    {
+        new_state.eo[i] = (eo[move.ep[i]] + move.eo[i]) % 2;
+    }
+
+    return new_state;
+}
+
+bool Cube::judge()
+{
+    for (int i = 0; i < sizeC; i++)
+    {
+        if (cp[i] != i)
+        {
+            return false;
+        }
+
+        if (co[i] != 0)
+        {
+            return false;
+        }
+    }
+
+    for (int i = 0; i < sizeE; i++)
+    {
+        if (ep[i] != i)
+        {
+            return false;
+        }
+
+        if (eo[i] != 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool Cube::move_available(string current, string next)
+{
+    if (current == "Start")
+    {
+        return true;
+    }
+
+    unordered_map<string, string> opposite;
+    opposite["R"] = "L";
+    opposite["L"] = "R";
+    opposite["U"] = "D";
+    opposite["D"] = "U";
+    opposite["F"] = "B";
+    opposite["B"] = "F";
+
+    string current_char(1, current.at(0));
+    string next_char(1, next.at(0));
+
+    if (current_char == next_char)
+    {
+        return false;
+    }
+    if (opposite.at(current_char) == next_char)
+    {
+        return current_char < next_char;
+    }
+    return true;
+}
+
+Cube Cube::operation(string move)
+{
+    unordered_map<string, Cube> next_operation;
+    next_operation["R"] = r_move;
+    next_operation["L"] = l_move;
+    next_operation["U"] = u_move;
+    next_operation["D"] = d_move;
+    next_operation["F"] = b_move;
+    next_operation["B"] = f_move;
+    next_operation["R'"] = rr_move;
+    next_operation["L'"] = lr_move;
+    next_operation["U'"] = ur_move;
+    next_operation["D'"] = dr_move;
+    next_operation["F'"] = br_move;
+    next_operation["B'"] = fr_move;
+    next_operation["R2"] = r2_move;
+    next_operation["L2"] = l2_move;
+    next_operation["U2"] = u2_move;
+    next_operation["D2"] = d2_move;
+    next_operation["F2"] = b2_move;
+    next_operation["B2"] = f2_move;
+
+    return next_operation.at(move);
+}
