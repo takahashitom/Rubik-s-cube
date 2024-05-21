@@ -97,20 +97,20 @@ Cube Cube::operation(string move)
     next_operation["L"] = l_move;
     next_operation["U"] = u_move;
     next_operation["D"] = d_move;
-    next_operation["F"] = b_move;
-    next_operation["B"] = f_move;
+    next_operation["F"] = f_move;
+    next_operation["B"] = b_move;
     next_operation["R'"] = rr_move;
     next_operation["L'"] = lr_move;
     next_operation["U'"] = ur_move;
     next_operation["D'"] = dr_move;
-    next_operation["F'"] = br_move;
-    next_operation["B'"] = fr_move;
+    next_operation["F'"] = fr_move;
+    next_operation["B'"] = br_move;
     next_operation["R2"] = r2_move;
     next_operation["L2"] = l2_move;
     next_operation["U2"] = u2_move;
     next_operation["D2"] = d2_move;
-    next_operation["F2"] = b2_move;
-    next_operation["B2"] = f2_move;
+    next_operation["F2"] = f2_move;
+    next_operation["B2"] = b2_move;
 
     return next_operation.at(move);
 }
