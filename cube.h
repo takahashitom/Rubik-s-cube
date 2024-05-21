@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cstring>
 #include <array>
+#include <vector>
+#include <string>
 
 constexpr int sizeC = 8;
 constexpr int sizeE = 12;
@@ -17,8 +19,12 @@ private:
     int eo[sizeE]; // エッジパーツの向き
 
 public:
+    std::vector<std::string> move = {"R", "L", "U", "D", "F", "B", "R'", "L'", "U'", "D'", "F'", "B'", "R2", "L2", "U2", "D2", "F2", "B2"};
+
+    // デフォルトコンストラクタ
     Cube() {}
 
+    // コンストラクタ
     Cube(int init_cp[sizeC], int init_co[sizeC], int init_ep[sizeE], int init_eo[sizeE])
     {
         std::memcpy(cp, init_cp, sizeC * sizeof(int));
@@ -27,63 +33,16 @@ public:
         std::memcpy(eo, init_eo, sizeE * sizeof(int));
     }
 
-    Cube apply_move(Cube move) const
-    {
-        Cube new_state;
+    // 操作を行う関数
+    Cube apply_move(Cube move) const;
 
-        for (int i = 0; i < sizeC; i++)
-        {
-            new_state.cp[i] = cp[move.cp[i]];
-        }
+    // 完成状態か判定する関数
+    bool judge();
 
-        for (int i = 0; i < sizeC; i++)
-        {
-            new_state.co[i] = (co[move.cp[i]] + move.co[i]) % 3;
-        }
+    // 次の操作が可能かどうかを判定する関数
+    bool move_available(std::string current, std::string next);
 
-        for (int i = 0; i < sizeE; i++)
-        {
-            new_state.ep[i] = ep[move.ep[i]];
-        }
-
-        for (int i = 0; i < sizeE; i++)
-        {
-            new_state.eo[i] = (eo[move.ep[i]] + move.eo[i]) % 2;
-        }
-
-        return new_state;
-    }
-
-    bool judge()
-    {
-        for (int i = 0; i < sizeC; i++)
-        {
-            if (cp[i] != i)
-            {
-                return false;
-            }
-
-            if (co[i] != 0)
-            {
-                return false;
-            }
-        }
-
-        for (int i = 0; i < sizeE; i++)
-        {
-            if (ep[i] != i)
-            {
-                return false;
-            }
-
-            if (eo[i] != 0)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    Cube operation(std::string move);
 
     void get_cp(int out_cp[sizeC])
     {
@@ -144,6 +103,17 @@ public:
         }
         std::cout << std::endl;
     }
+};
+
+class Search
+{
+private:
+    std::vector<std::string> move{"Start"};
+
+public:
+    bool depth_limited_search(Cube current_state, int depth);
+
+    bool start_search(Cube state, int max_length);
 };
 
 extern const Cube r_move;
