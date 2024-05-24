@@ -154,43 +154,43 @@ auto index_to_cp_ep(int index)
     return parts;
 }
 
-int main()
+int e_ep_to_index(vector<int> parts)
 {
-    int init_cp[sizeC] = {1, 7, 6, 2, 4, 5, 0, 3};
-    int init_co[sizeC] = {0, 0, 1, 2, 0, 0, 0, 0};
-    int init_ep[sizeE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-    int init_eo[sizeE] = {1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0};
-
-    Cube C(init_cp, init_co, init_ep, init_eo);
-
-    // cout << eo_to_index(C) << endl;
-
-    // vector<int> eo = index_to_eo(1604);
-
-    // for (auto i : eo)
-    // {
-    //     cout << i << ", ";
-    // }
-    // cout << endl;
-
-    // vector<int> v{1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0};
-
-    // cout << combination_to_index(v) << endl;
-
-    // vector<int> combination = index_to_combination(494);
-
-    // for (auto i : combination)
-    // {
-    //     cout << i << ", ";
-    // }
-    // cout << endl;
-
-    vector<int> cp = index_to_cp_ep(10000);
-    for (auto i : cp)
+    int index = 0;
+    for (int i = 0; i < 4; i++)
     {
-        cout << i << ", ";
+        int count = 0;
+        for (int j = i + 1; j < 4; j++)
+        {
+            if (parts[i] > parts[j])
+            {
+                count++;
+            }
+        }
+        index = index + (factorial(4 - 1 - i) * count);
     }
-    cout << endl;
 
-    cout << cp_ep_to_index(cp) << endl;
+    return index;
+}
+
+auto index_to_e_ep(int index)
+{
+    vector<int> parts(4);
+    vector<int> elements(4);
+
+    for (int i = 0; i < 4; i++)
+    {
+        elements[i] = i;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        int fact = factorial(4 - 1 - i);
+        int selected = index / fact;
+        parts[i] = elements[selected];
+        elements.erase(elements.begin() + selected);
+        index %= fact;
+    }
+
+    return parts;
 }
