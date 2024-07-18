@@ -1,4 +1,4 @@
-#include "cube.h"
+#include "index.h"
 #include <algorithm>
 #include <iterator>
 
@@ -20,7 +20,7 @@ int co_to_index(Cube state)
     return index;
 }
 
-auto index_to_co(int index)
+vector<int> index_to_co(int index)
 {
     vector<int> co(sizeC);
     int sum_co = 0;
@@ -51,7 +51,7 @@ int eo_to_index(Cube state)
     return index;
 }
 
-auto index_to_eo(int index)
+vector<int> index_to_eo(int index)
 {
     vector<int> eo(sizeE);
     int sum_eo = 0;
@@ -87,7 +87,7 @@ int combination_to_index(vector<int> combination)
     return index;
 }
 
-auto index_to_combination(int index)
+vector<int> index_to_combination(int index)
 {
     vector<int> combination(sizeE, 0);
 
@@ -132,7 +132,7 @@ int cp_ep_to_index(vector<int> parts)
     return index;
 }
 
-auto index_to_cp_ep(int index)
+vector<int> index_to_cp_ep(int index)
 {
     vector<int> parts(sizeC);
     vector<int> elements(sizeC);
@@ -173,7 +173,7 @@ int e_ep_to_index(vector<int> parts)
     return index;
 }
 
-auto index_to_e_ep(int index)
+vector<int> index_to_e_ep(int index)
 {
     vector<int> parts(4);
     vector<int> elements(4);
