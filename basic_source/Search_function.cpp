@@ -28,6 +28,7 @@ bool Search::depth_limited_search(Cube current_state, int depth)
     {
         return true;
     }
+
     if (depth == 0)
     {
         return false;
@@ -42,7 +43,7 @@ bool Search::depth_limited_search(Cube current_state, int depth)
 
     for (auto next : current_state.move)
     {
-        if (current_state.move_available(prev_move, next) == 0)
+        if (!current_state.move_available(prev_move, next))
         {
             continue;
         }

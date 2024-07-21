@@ -33,6 +33,7 @@ int main()
     C = C.apply_move(f2_move);
     C = C.apply_move(d2_move);
     C = C.apply_move(l_move);
+    C = C.apply_move(fr_move);
 
     y.start_search(C, 20);
 
