@@ -155,13 +155,117 @@ vector<vector<int>> make_cp_move_table()
             {
                 new_state_vec.push_back(i);
             }
-            next_index.push_back(combination_to_index(new_state_vec));
+            next_index.push_back(cp_ep_to_index(new_state_vec));
         }
 
+        cout << "finish: " << i << endl;
         cp_move_table.push_back(next_index);
     }
 
     return cp_move_table;
+}
+
+vector<vector<int>> make_ud_ep_move_table()
+{
+    const int NUM_EP = 40320; // ud面のepのとり得る状態の数
+    vector<vector<int>> ud_ep_move_table;
+    int init_co[sizeC] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int init_cp[sizeC] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int init_eo[sizeE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    for (int i = 0; i < NUM_EP; i++)
+    {
+        vector<int> next_index;
+
+        int init_ep[sizeE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        vector<int> vec_ep = index_to_cp_ep(i);
+
+        int j = 0;
+        for (auto i : vec_ep)
+        {
+            init_ep[j + 4] = i;
+            j++;
+        }
+
+        Cube state(init_cp, init_co, init_ep, init_eo);
+
+        for (auto move : state.phase2_move)
+        {
+            Cube new_state = state.apply_move(state.operation(move));
+            int new_state_ep[sizeE];
+            new_state.get_ep(new_state_ep);
+            // 配列をvectorに変換する処理
+            vector<int> new_state_vec;
+            j = 0;
+            for (auto i : new_state_ep)
+            {
+                if (j < 4)
+                {
+                    j++;
+                    continue;
+                }
+                new_state_vec.push_back(i);
+            }
+            next_index.push_back(cp_ep_to_index(new_state_vec));
+        }
+
+        cout << "finish: " << i << endl;
+        ud_ep_move_table.push_back(next_index);
+    }
+
+    return ud_ep_move_table;
+}
+
+vector<vector<int>> make_e_ep_move_table()
+{
+    const int NUM_EP = 24; // e列のepのとり得る状態の数
+    vector<vector<int>> e_ep_move_table;
+    int init_co[sizeC] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int init_cp[sizeC] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int init_eo[sizeE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    for (int i = 0; i < NUM_EP; i++)
+    {
+        vector<int> next_index;
+
+        int init_ep[sizeE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        vector<int> vec_ep = index_to_e_ep(i);
+
+        int j = 0;
+        for (auto i : vec_ep)
+        {
+            init_ep[j] = i;
+            j++;
+        }
+
+        Cube state(init_cp, init_co, init_ep, init_eo);
+
+        for (auto move : state.phase2_move)
+        {
+            Cube new_state = state.apply_move(state.operation(move));
+            int new_state_ep[sizeE];
+            new_state.get_ep(new_state_ep);
+            // 配列をvectorに変換する処理
+            vector<int> new_state_vec;
+            j = 0;
+            for (auto i : new_state_ep)
+            {
+                // new_state_epの４列目まで代入する
+                if (j >= 4)
+                {
+                    break;
+                }
+                new_state_vec.push_back(i);
+                j++;
+            }
+            next_index.push_back(e_ep_to_index(new_state_vec));
+        }
+
+        cout << "finish: " << i << endl;
+        e_ep_move_table.push_back(next_index);
+    }
+
+    return e_ep_move_table;
 }
 
 int main()
@@ -178,7 +282,18 @@ int main()
     // vector<vector<int>> tab_e_comb = make_e_combination_table();
     // writeCSV(tab_e_comb, file_e_comb);
 
-    string file_cp = "cp_move_table.csv";
-    vector<vector<int>> tab_cp = make_cp_move_table();
-    writeCSV(tab_cp, file_cp);
+    // string file_cp = "cp_move_table.csv";
+    // cout << "start" << endl;
+    // vector<vector<int>> tab_cp = make_cp_move_table();
+    // writeCSV(tab_cp, file_cp);
+
+    // string file_ud_ep = "ud_ep_move_table.csv";
+    // cout << "start" << endl;
+    // vector<vector<int>> tab_ud_ep = make_ud_ep_move_table();
+    // writeCSV(tab_ud_ep, file_ud_ep);
+
+    string file_e_ep = "e_ep_move_table.csv";
+    cout << "start" << endl;
+    vector<vector<int>> tab_e_ep = make_e_ep_move_table();
+    writeCSV(tab_e_ep, file_e_ep);
 }
