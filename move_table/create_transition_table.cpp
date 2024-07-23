@@ -120,6 +120,50 @@ vector<vector<int>> make_e_combination_table()
     return e_combination_table;
 }
 
+vector<vector<int>> make_cp_move_table()
+{
+    const int NUM_CP = 40320; // cpのとり得る状態の数
+    vector<vector<int>> cp_move_table;
+    int init_co[sizeC] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int init_ep[sizeE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int init_eo[sizeE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    for (int i = 0; i < NUM_CP; i++)
+    {
+        vector<int> next_index;
+
+        int init_cp[sizeC];
+        vector<int> vec_cp = index_to_cp_ep(i);
+
+        int j = 0;
+        for (auto i : vec_cp)
+        {
+            init_cp[j] = i;
+            j++;
+        }
+
+        Cube state(init_cp, init_co, init_ep, init_eo);
+
+        for (auto move : state.phase2_move)
+        {
+            Cube new_state = state.apply_move(state.operation(move));
+            int new_state_cp[sizeC];
+            new_state.get_cp(new_state_cp);
+            // 配列をvectorに変換する処理
+            vector<int> new_state_vec;
+            for (auto i : new_state_cp)
+            {
+                new_state_vec.push_back(i);
+            }
+            next_index.push_back(combination_to_index(new_state_vec));
+        }
+
+        cp_move_table.push_back(next_index);
+    }
+
+    return cp_move_table;
+}
+
 int main()
 {
     // string file_co = "co_move_table.csv";
@@ -130,7 +174,11 @@ int main()
     // vector<vector<int>> tab_eo = make_eo_move_table();
     // writeCSV(tab_eo, file_eo);
 
-    string file_e_comb = "e_combination_table.csv";
-    vector<vector<int>> tab_e_comb = make_e_combination_table();
-    writeCSV(tab_e_comb, file_e_comb);
+    // string file_e_comb = "e_combination_table.csv";
+    // vector<vector<int>> tab_e_comb = make_e_combination_table();
+    // writeCSV(tab_e_comb, file_e_comb);
+
+    string file_cp = "cp_move_table.csv";
+    vector<vector<int>> tab_cp = make_cp_move_table();
+    writeCSV(tab_cp, file_cp);
 }

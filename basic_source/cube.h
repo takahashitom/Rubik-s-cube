@@ -20,6 +20,7 @@ private:
 
 public:
     std::vector<std::string> move = {"R", "L", "U", "D", "F", "B", "R'", "L'", "U'", "D'", "F'", "B'", "R2", "L2", "U2", "D2", "F2", "B2"};
+    std::vector<std::string> phase2_move = {"U", "D", "U'", "D'", "R2", "L2", "U2", "D2", "F2", "B2"};
 
     // デフォルトコンストラクタ
     Cube() {}
