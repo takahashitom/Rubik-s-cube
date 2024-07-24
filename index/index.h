@@ -33,4 +33,7 @@ int e_ep_to_index(std::vector<int> parts);
 // indexからe列のepを計算する関数
 std::vector<int> index_to_e_ep(int index);
 
+// 動作をindex化する関数
+int move_to_index(std::string move);
+
 #endif

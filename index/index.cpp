@@ -194,3 +194,28 @@ vector<int> index_to_e_ep(int index)
 
     return parts;
 }
+
+int move_to_index(string move)
+{
+    unordered_map<string, int> next_operation;
+    next_operation["R"] = 0;
+    next_operation["L"] = 1;
+    next_operation["U"] = 2;
+    next_operation["D"] = 3;
+    next_operation["F"] = 4;
+    next_operation["B"] = 5;
+    next_operation["R'"] = 6;
+    next_operation["L'"] = 7;
+    next_operation["U'"] = 8;
+    next_operation["D'"] = 9;
+    next_operation["F'"] = 10;
+    next_operation["B'"] = 11;
+    next_operation["R2"] = 12;
+    next_operation["L2"] = 13;
+    next_operation["U2"] = 14;
+    next_operation["D2"] = 15;
+    next_operation["F2"] = 16;
+    next_operation["B2"] = 17;
+
+    return next_operation.at(move);
+}

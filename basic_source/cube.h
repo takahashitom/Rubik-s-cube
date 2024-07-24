@@ -6,6 +6,7 @@
 #include <array>
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 constexpr int sizeC = 8;
 constexpr int sizeE = 12;
@@ -19,8 +20,8 @@ private:
     int eo[sizeE]; // エッジパーツの向き
 
 public:
-    std::vector<std::string> move = {"R", "L", "U", "D", "F", "B", "R'", "L'", "U'", "D'", "F'", "B'", "R2", "L2", "U2", "D2", "F2", "B2"};
-    std::vector<std::string> phase2_move = {"U", "D", "U'", "D'", "R2", "L2", "U2", "D2", "F2", "B2"};
+    static std::vector<std::string> move;
+    static std::vector<std::string> phase2_move;
 
     // デフォルトコンストラクタ
     Cube() {}
@@ -47,7 +48,7 @@ public:
     int count_solved_edges();
 
     // 次の操作が可能かどうかを判定する関数
-    bool move_available(std::string current, std::string next);
+    static bool move_available(std::string current, std::string next);
 
     // 操作(string)をCube型で定義したものに対応付ける関数
     Cube operation(std::string move);
@@ -115,13 +116,13 @@ public:
 
 class Search
 {
-private:
+protected:
     std::vector<std::string> move{"Start"};
 
 public:
     bool depth_limited_search(Cube current_state, int depth);
 
-    bool start_search(Cube state, int max_length);
+    virtual bool start_search(Cube state, int max_length);
 };
 
 extern const Cube r_move;
