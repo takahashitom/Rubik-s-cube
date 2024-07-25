@@ -219,3 +219,20 @@ int move_to_index(string move)
 
     return next_operation.at(move);
 }
+
+int move_to_index_ph2(string move)
+{
+    unordered_map<string, int> next_operation;
+    next_operation["U"] = 0;
+    next_operation["D"] = 1;
+    next_operation["U'"] = 2;
+    next_operation["D'"] = 3;
+    next_operation["R2"] = 4;
+    next_operation["L2"] = 5;
+    next_operation["U2"] = 6;
+    next_operation["D2"] = 7;
+    next_operation["F2"] = 8;
+    next_operation["B2"] = 9;
+
+    return next_operation.at(move);
+}

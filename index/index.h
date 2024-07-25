@@ -36,4 +36,7 @@ std::vector<int> index_to_e_ep(int index);
 // 動作をindex化する関数
 int move_to_index(std::string move);
 
+// 動作をindex化する関数(Phase2用)
+int move_to_index_ph2(std::string move);
+
 #endif
